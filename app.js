@@ -15,6 +15,11 @@ let snakeDirection = {
     y: -1
 }
 
+let snakeLastPartLastTick = {
+    x: 0,
+    y: 0
+}
+
 let lastClickedKey = 0
 
 const game = document.getElementById('game')
@@ -47,6 +52,8 @@ let placeApple = () => {
 }
 
 let gameTick = () => {
+    snakeLastPartLastTick.x = snake[snake.length - 1].x
+    snakeLastPartLastTick.y = snake[snake.length - 1].y
     for (let i = snake.length - 1; i >= 0; i--) {
         if (i == 0) {
             snake[i].x += snakeDirection.x
@@ -123,18 +130,12 @@ let isGameOver = () => {
 
 let isAppleEaten = () => {
     if ((snake[0].x == apple.x) && (snake[0].y == apple.y)) {
-        if (snake.length > 1) {
             snake.push({
-                x: snake[snake.length - 1].x - (snake[snake.length - 1].x - snake[snake.length - 2].x),
-                y: snake[snake.length - 1].y - (snake[snake.length - 1].y - snake[snake.length - 2].y)
+                //x: snake[snake.length - 1].x - (snake[snake.length - 1].x - snake[snake.length - 2].x),
+                //y: snake[snake.length - 1].y - (snake[snake.length - 1].y - snake[snake.length - 2].y)
+                x: snakeLastPartLastTick.x,
+                y: snakeLastPartLastTick.y
             })
-        } else {
-            snake.push({
-                x: snake[snake.length - 1].x - snakeDirection.x,
-                y: snake[snake.length - 1].y - snakeDirection.y
-            })
-        }
-        
         placeApple()
     }
 }

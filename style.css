@@ -19,7 +19,6 @@ body {
 
 .snake {
     background-color: #0f0;
-    //border: 1px solid #000;
     box-sizing: border-box;
     margin: 1px;
 }
